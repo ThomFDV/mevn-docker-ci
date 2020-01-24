@@ -1,0 +1,25 @@
+version: '3'
+services:
+  vue-client:
+    build: ./client
+    command: http-server dist
+    ports:
+      - "8080:8080"
+    links:
+      - node-server
+    restart: always
+
+  node-server:
+    build: ./server
+    command: npm run serve
+    ports:
+      - "9000:9000"
+    links:
+      - mongo
+    restart: always
+
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    restart: always
