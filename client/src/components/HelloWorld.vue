@@ -36,7 +36,7 @@
           </md-card-content>
 
           <md-card-actions>
-            <md-button class="md-raised md-primary" @click.prevent="submitted"
+            <md-button class="md-raised md-primary" id="submit" @click.prevent="submitted"
               >Create</md-button
             >
           </md-card-actions>
@@ -46,7 +46,7 @@
     <div>
       <md-card
         v-for="(user, index) in users"
-        :key="user"
+        :key="index"
         class="multiple-card-container"
       >
         <md-card-header>
@@ -80,6 +80,7 @@ export default {
   },
   methods: {
     submitted: function () {
+      this.users.push(this.userData)
       axios.post('http://localhost:9000/users', {
         name: this.userData.name,
         age: this.userData.age
