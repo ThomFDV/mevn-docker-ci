@@ -15,23 +15,26 @@
           </md-card-header>
 
           <md-card-content>
-            <md-field>
-              <label>Initial Value</label>
+            <md-field :class="nameError">
+              <label>User name</label>
               <md-input
                 id="name"
-                class="form-control error"
+                class="form-control"
                 v-model="userData.name"
+                required
               ></md-input>
+              <span class="md-error">Name must not be empty</span>
             </md-field>
-            <p v-if="error">{{ error }}</p>
-            <md-field>
-              <label>Initial Value</label>
+            <md-field :class="ageError">
+              <label>User age</label>
               <md-input
                 type="number"
                 id="age"
                 class="form-control"
                 v-model="userData.age"
+                required
               ></md-input>
+              <span class="md-error">Age must not be empty</span>
             </md-field>
           </md-card-content>
 
@@ -72,14 +75,15 @@ export default {
   data () {
     return {
       userData: {
-        name: '',
-        age: 28
+        name: 'toto',
+        age: 1
       },
       users: []
     }
   },
   methods: {
     submitted: function () {
+      if (!this.userData.name || !this.userData.age) return
       this.users.push(this.userData)
       axios.post('http://localhost:9000/users', {
         name: this.userData.name,
@@ -88,10 +92,15 @@ export default {
     }
   },
   computed: {
-    error () {
-      return this.userData.name.trim().length < 7
-        ? 'Please enter a longer username'
-        : ''
+    nameError () {
+      return {
+        'md-invalid': !this.userData.name
+      }
+    },
+    ageError () {
+      return {
+        'md-invalid': !this.userData.age
+      }
     }
   },
   mounted () {

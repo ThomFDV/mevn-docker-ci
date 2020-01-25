@@ -15,12 +15,12 @@ describe('HelloWorld.vue', () => {
     expect(wrapper.isVueInstance()).toBeTruthy()
   })
 
-  it('should have empty initial name', () => {
-    expect(wrapper.vm.userData.name).toBe('')
+  it('should have default value in name', () => {
+    expect(wrapper.vm.userData.name).toBeTruthy()
   })
 
-  it('should have 28 as initial age', () => {
-    expect(wrapper.vm.userData.age).toBe(28)
+  it('should have a default value in age', () => {
+    expect(wrapper.vm.userData.age).toBeTruthy()
   })
 
   it('should find name input', () => {
@@ -32,16 +32,24 @@ describe('HelloWorld.vue', () => {
     const ageInput = wrapper.find('#age')
     const submitBtn = wrapper.find('#submit')
     const user = {
-      name: 'tatatata',
+      name: 'tata',
       age: '22'
     }
 
-    nameInput.setValue('tatatata')
+    nameInput.setValue('tata')
     ageInput.setValue(22)
     submitBtn.trigger('click')
 
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.users[0]).toEqual(user)
+  })
+
+  it('Should emit an error', () => {
+    const nameInput = wrapper.find('#name')
+
+    nameInput.setValue('')
+
+    expect(wrapper.find('.md-error').exists()).toBe(true)
   })
 })
