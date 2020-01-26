@@ -27,29 +27,36 @@ describe('HelloWorld.vue', () => {
     expect(wrapper.contains('#name')).toBe(true)
   })
 
-  it('should add a new user', async () => {
-    const nameInput = wrapper.find('#name')
-    const ageInput = wrapper.find('#age')
-    const submitBtn = wrapper.find('#submit')
-    const user = {
-      name: 'tata',
-      age: '22'
-    }
-
-    nameInput.setValue('tata')
-    ageInput.setValue(22)
-    submitBtn.trigger('click')
-
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.vm.users[0]).toEqual(user)
-  })
-
   it('Should emit an error', () => {
     const nameInput = wrapper.find('#name')
 
     nameInput.setValue('')
 
     expect(wrapper.find('.md-error').exists()).toBe(true)
+  })
+})
+
+describe('should create a new user in HelloWorld.vue', () => {
+
+  const wrapper = mount(HelloWorld)
+
+  it('should add a new user', async () => {
+    const submitBtn = wrapper.find('#submit')
+    const user = {
+      name: 'tata',
+      age: 22
+    }
+    wrapper.setData({
+      userData: {
+        name: 'tata',
+        age: 22
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+
+    submitBtn.trigger('click')
+
+    expect(wrapper.vm.users[0]).toEqual(user)
   })
 })

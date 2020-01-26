@@ -60,6 +60,12 @@
           <p>{{ user.name }}</p>
           <p>{{ user.age }}</p>
         </md-card-content>
+
+        <md-card-actions>
+          <md-button class="md-icon-button md-raised md-accent" @click.prevent="deleted(user.name)">
+            <md-icon>delete</md-icon>
+          </md-button>
+        </md-card-actions>
       </md-card>
     </div>
   </div>
@@ -84,11 +90,18 @@ export default {
   methods: {
     submitted: function () {
       if (!this.userData.name || !this.userData.age) return
-      this.users.push(this.userData)
+      this.users.push({
+        name: this.userData.name,
+        age: this.userData.age
+      })
       axios.post('http://localhost:9000/users', {
         name: this.userData.name,
         age: this.userData.age
       })
+    },
+    deleted: function (userName) {
+      this.users = this.users.filter((user) => user.name !== userName)
+      axios.delete(`http://localhost:9000/users/${userName}`)
     }
   },
   computed: {
@@ -129,6 +142,10 @@ export default {
   margin: 4px;
   display: inline-block;
   vertical-align: top;
+}
+
+.multiple-card-container > .md-card-actions > .md-button {
+  min-width: 0 !important;
 }
 @media (min-width: 768px) {
   .card-container {
