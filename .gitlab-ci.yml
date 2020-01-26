@@ -1,6 +1,3 @@
-stages:
-	- build
-	- deploy
 build prod:
 	image: node:10.15.0-stretch
 	stage: build
