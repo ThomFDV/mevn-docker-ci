@@ -36,9 +36,25 @@ describe('HelloWorld.vue', () => {
   })
 })
 
-describe('should create a new user in HelloWorld.vue', () => {
+describe('test user functions in HelloWorld.vue', () => {
 
   const wrapper = mount(HelloWorld)
+
+  it('should not add empty user', async () => {
+    const submitBtn = wrapper.find('#submit')
+    wrapper.setData({
+      userData: {
+        name: '',
+        age: null
+      }
+    })
+
+    await wrapper.vm.$nextTick()
+
+    submitBtn.trigger('click')
+
+    expect(wrapper.vm.users[0]).toBeFalsy()
+  })
 
   it('should add a new user', async () => {
     const submitBtn = wrapper.find('#submit')
@@ -58,5 +74,15 @@ describe('should create a new user in HelloWorld.vue', () => {
     submitBtn.trigger('click')
 
     expect(wrapper.vm.users[0]).toEqual(user)
+  })
+
+  it('should delete the first user', async () => {
+    const deleteBtn = wrapper.find('#delete')
+
+    deleteBtn.trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.users).toEqual([])
   })
 })

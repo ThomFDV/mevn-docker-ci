@@ -62,7 +62,7 @@
         </md-card-content>
 
         <md-card-actions>
-          <md-button class="md-icon-button md-raised md-accent" @click.prevent="deleted(user.name)">
+          <md-button id="delete" class="md-icon-button md-raised md-accent" @click.prevent="deleted(user.name)">
             <md-icon>delete</md-icon>
           </md-button>
         </md-card-actions>
