@@ -1,12 +1,13 @@
 stages:
   - build
-  - deploy
+  # - deploy
 build prod:
   image: node:10.15.0-stretch
   stage: build
   only:
     - tags
   script:
+    - cd client
     - npm install -g @vue/cli@latest
     - npm install
     - npm run build
@@ -14,11 +15,11 @@ build prod:
     paths:
       - dist/
     expire_in: 1 hour
-deploy prod:
-  image: python:latest
-  stage: deploy
-  only:
-    - tags
-  script:
-    - pip install awscli
-    - aws s3 sync ./dist s3://thomfdv-ci-project
+# deploy prod:
+#   image: python:latest
+#   stage: deploy
+#   only:
+#     - tags
+#   script:
+#     - pip install awscli
+#     - aws s3 sync ./dist s3://thomfdv-ci-project
