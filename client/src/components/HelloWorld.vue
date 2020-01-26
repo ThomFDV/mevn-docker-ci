@@ -53,7 +53,7 @@
         class="multiple-card-container"
       >
         <md-card-header>
-          <div class="md-title">User {{ index }}</div>
+          <div class="md-title">User - {{ index }}</div>
         </md-card-header>
 
         <md-card-content>
