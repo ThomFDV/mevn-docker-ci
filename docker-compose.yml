@@ -4,8 +4,8 @@ services:
     build: ./client
     command: http-server dist
     ports:
-      - "8080:8080"
-    links:
+      - "8090:8080"
+    depends_on:
       - node-server
     restart: always
 
@@ -14,7 +14,7 @@ services:
     command: npm run serve
     ports:
       - "9000:9000"
-    links:
+    depends_on:
       - mongo
     restart: always
 
