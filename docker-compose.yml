@@ -14,12 +14,4 @@ services:
     command: npm run serve
     ports:
       - "9000:9000"
-    depends_on:
-      - mongo
-    restart: always
-
-  mongo:
-    image: mongo
-    ports:
-      - "27017:27017"
     restart: always

@@ -19,7 +19,7 @@ app.use(cors());
 
 app.set('view engine', 'html');
 
-const dbHost = 'mongodb://mongo/mevn-docker';
+const dbHost = 'mongodb+srv://ci-project:LePAcTr0pB1-2019@cluster0-2n5c1.mongodb.net/test?retryWrites=true&w=majority';
 mongoose.connect(dbHost);
 
 // Static folder

@@ -12,11 +12,13 @@
     "e2e": "node test/e2e/runner.js",
     "start": "npm run dev",
     "test": "npm run unit && npm run e2e",
-    "unit": "jest --config test/unit/jest.conf.js"
+    "unit": "jest --config test/unit/jest.conf.js",
+    "deploy": "aws s3 sync --acl public-read --delete dist/ s3://thomfdv-ci-project"
   },
   "dependencies": {
     "axios": "^0.19.2",
     "vue": "^2.5.2",
+    "vue-cli-plugin-s3-deploy": "^3.0.0",
     "vue-material": "^1.0.0-beta-11",
     "vue-router": "^3.0.1"
   },
