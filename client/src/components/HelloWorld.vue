@@ -94,14 +94,14 @@ export default {
         name: this.userData.name,
         age: this.userData.age
       })
-      axios.post('http://localhost:9000/users', {
+      axios.post('http://ec2-34-246-190-69.eu-west-1.compute.amazonaws.com/users', {
         name: this.userData.name,
         age: this.userData.age
       })
     },
     deleted: function (userName) {
       this.users = this.users.filter((user) => user.name !== userName)
-      axios.delete(`http://localhost:9000/users/${userName}`)
+      axios.delete(`http://ec2-34-246-190-69.eu-west-1.compute.amazonaws.com/users/${userName}`)
     }
   },
   computed: {
@@ -117,7 +117,7 @@ export default {
     }
   },
   mounted () {
-    axios.get('http://localhost:9000/users').then(res => {
+    axios.get('http://ec2-34-246-190-69.eu-west-1.compute.amazonaws.com/users').then(res => {
       this.users = res.data
     })
   }
