@@ -8,8 +8,9 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        git 'https://gitlab.com/thomfdv/mevn-docker-ci.git'
+        git 'https://github.com/ThomFDV/mevn-docker-ci.git'
         sh 'cd client && npm install'
+        sh 'cd client && npm run build'
         sh 'cd server && npm install'
       }
 
